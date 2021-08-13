@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DealDouble.Entities
 {
-    class Auction
+    public class Auction
     {
+        public int ID { get; set; }
         public string Title { get; set; }
         public string PictureURL { get; set; }
         public string Description { get; set; }

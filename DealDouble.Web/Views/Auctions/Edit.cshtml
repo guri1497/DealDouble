@@ -6,9 +6,10 @@
 
 <h2>Edit</h2>
 
-<form method="post">
+<form id="formEdit">
 
     <label>Title</label>
+    <input name="ID" value="@Model.ID" type="hidden"/>
     <input name="Title" value="@Model.Title"/>
     <br />
 
@@ -34,6 +35,27 @@
     <input name="EndTime" value="@Model.EndTime"/>
     <br />
 
-    <button>Submit</button>
+    <button id="btnEdit">Submit</button>
 
 </form>
+
+<script>
+    $("#btnEdit").click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '/Auctions/Edit/',
+            data: $("#formEdit").serialize()
+
+        })
+            .done(function (data) {
+                $(".mainContent").html(data);
+                $(".actionArea").html("");
+
+            })
+            .fail(function (data) {
+                alert("failed");
+            });
+
+    });
+</script>

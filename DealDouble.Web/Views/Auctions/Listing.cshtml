@@ -4,7 +4,6 @@
     Layout = null;
 }
 <div>
-
     <button id="btnNew"> New Auction </button>
 </div>
 
@@ -34,8 +33,8 @@
                 <td>@item.ActualAmount</td>
                 <td>@item.StartingTime</td>
                 <td>@item.EndTime</td>
-                <td><a href="Edit/@item.ID">Edit</a></td>
-                <td><a href="Delete/@item.ID">Delete</a></td>
+                <td><button class="btnEdit" data-ID="@item.ID">Edit</button></td>
+                <td><button class="btnDelete" data-ID="@item.ID">Delete</button></td>
             </tr>
         }
 
@@ -58,6 +57,44 @@
 
         });
 
+    });
+
+
+
+    $(".btnEdit").click(function () {
+        
+        $.ajax({
+            type: 'GET',
+            url: '/Auctions/Edit',
+            data: {
+                ID: $(this).attr('data-ID')
+            }
+        })
+            .done(function (response) {
+                $(".actionArea").html(response);
+               
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+    });
+
+    $(".btnDelete").click(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: '/Auctions/Delete',
+            data: {
+                ID: $(this).attr('data-ID')
+            }
+        })
+            .done(function (response) {
+                $(".actionArea").html(response);
+
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
     });
 
 </script>

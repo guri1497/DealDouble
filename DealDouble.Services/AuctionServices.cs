@@ -32,9 +32,11 @@ namespace DealDouble.Services
 
         public void UpdateAuction(Auction auction)
         {
-            DealDoubleContext context = new DealDoubleContext();
-            context.Entry(auction).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
+            using (var context = new DealDoubleContext())
+            {
+                context.Entry(auction).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         public void DeleteAuction(Auction auction)

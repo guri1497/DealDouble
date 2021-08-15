@@ -49,8 +49,7 @@ namespace DealDouble.Web.Controllers
         [HttpPost]
         public ActionResult Edit(Auction auction)
         {
-            AuctionServices auctionServices = new AuctionServices();
-            auctionServices.SaveAuction(auction);
+            auctionServices.UpdateAuction(auction);
             return RedirectToAction("Listing");
         }
 
@@ -62,10 +61,16 @@ namespace DealDouble.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Auction auction)
+        public ActionResult Delete(int ID,string Value)
         {
-            auctionServices.DeleteAuction(auction);
+            if(ID != null && Value == "Yes")
+            {
+                var auction = auctionServices.GetAuctionByID(ID);
+                auctionServices.DeleteAuction(auction);
+                return RedirectToAction("Listing");
+            }
             return RedirectToAction("Listing");
+
         }
     }
 }

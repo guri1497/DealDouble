@@ -7,13 +7,33 @@
 
 <h1>Are you sure want to delete the auction ?</h1>
 
-<form method="post">
-    <span hidden>@Model.ID</span>
-    <button>Yes</button>
-</form>
 
-<form method="get" action="/Auctions/">
-    <span hidden>@Model.ID</span>
-    <button>No</button>
-</form>
 
+<div>
+    <button class="btnDelete" data-id="@Model.ID" value="Yes">Yes</button>
+    <button class="btnDelete" data-id="@Model.ID" value="No">No</button>
+</div>
+
+
+<script>
+    $(".btnDelete").click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '/Auctions/Delete/',
+            data: {
+                ID: $(this).attr('data-id'),
+                Value: $(this).attr('value')
+            }
+        })
+            .done(function (data) {
+                $(".mainContent").html(data);
+                $(".actionArea").html("");
+
+            })
+            .fail(function (data) {
+                alert("failed");
+            });
+
+    });
+</script>

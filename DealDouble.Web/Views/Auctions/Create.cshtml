@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Create";
+    Layout = null;
 }
 
 <h2>Create</h2>
 
-<form method="post">
+<form id="formCreate">
 
     <label>Title</label>
     <input name="Title" />
@@ -33,6 +33,30 @@
     <input name="EndTime"/>
     <br />
 
-    <button>Submit</button>
+    <button id="btnCreate">Submit</button>
 
 </form>
+
+<script>
+
+    $("#btnCreate").click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '/Auctions/Create/',
+            data: $("#formCreate").serialize()
+
+        })
+            .done(function (data) {
+                $(".mainContent").html(data);
+                $(".actionArea").html("");
+
+            })
+               .fail(function (data) {
+                alert("failed");
+        });
+
+    });
+
+
+</script>

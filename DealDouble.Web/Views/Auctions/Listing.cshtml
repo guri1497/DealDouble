@@ -1,0 +1,63 @@
+﻿@model List<DealDouble.Entities.Auction>
+
+@{
+    Layout = null;
+}
+<div>
+
+    <button id="btnNew"> New Auction </button>
+</div>
+
+<h2>All Auctions</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Picture URL</th>
+            <th>Description</th>
+            <th>Actual Amount</th>
+            <th>Starting Time</th>
+            <th>End Time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <span hidden>@item.ID</span>@item.Title
+                </td>
+                <td>@item.PictureURL</td>
+                <td>@item.Description</td>
+                <td>@item.ActualAmount</td>
+                <td>@item.StartingTime</td>
+                <td>@item.EndTime</td>
+                <td><a href="Edit/@item.ID">Edit</a></td>
+                <td><a href="Delete/@item.ID">Delete</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    
+    $("#btnNew").on("click", function() {
+
+        $.ajax({
+            type: "GET",
+            url: "/Auctions/Create/",
+            success: function (response) {
+                $(".actionArea").html(response);
+            },
+            error: function (response) {
+                alert("Failed to load");
+            }
+
+        });
+
+    });
+
+</script>

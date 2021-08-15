@@ -45,7 +45,7 @@ namespace DealDouble.Web.Controllers
         {
             AuctionServices auctionServices = new AuctionServices();
             auctionServices.SaveAuction(auction);
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

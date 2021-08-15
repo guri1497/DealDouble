@@ -6,8 +6,14 @@
 <h2>Delete</h2>
 
 <h1>Are you sure want to delete the auction ?</h1>
-<form>
+
+<form method="post">
     <span hidden>@Model.ID</span>
     <button>Yes</button>
+</form>
+
+<form method="get" action="/Auctions/">
+    <span hidden>@Model.ID</span>
     <button>No</button>
 </form>
+

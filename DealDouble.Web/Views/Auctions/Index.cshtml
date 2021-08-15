@@ -20,16 +20,18 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                <span hidden>@item.ID</span>@item.Title</td>
-                <td>@item.PictureURL</td>
-                <td>@item.Description</td>
-                <td>@item.ActualAmount</td>
-                <td>@item.StartingTime</td>
-                <td>@item.EndTime</td>
-               <td><a href="Delete/@item.ID">Delete</a></td>
-            </tr>
+        <tr>
+            <td>
+                <span hidden>@item.ID</span>@item.Title
+            </td>
+            <td>@item.PictureURL</td>
+            <td>@item.Description</td>
+            <td>@item.ActualAmount</td>
+            <td>@item.StartingTime</td>
+            <td>@item.EndTime</td>
+            <td><a href="Edit/@item.ID">Edit</a></td>
+            <td><a href="Delete/@item.ID">Delete</a></td>
+        </tr>
         }
 
     </tbody>

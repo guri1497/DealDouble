@@ -1,46 +1,50 @@
-﻿@model List<DealDouble.Entities.Auction>
+﻿@model DealDouble.Web.ViewModels.AuctionListingViewModel
 
 @{
     Layout = null;
 }
 <div>
-    <button id="btnNew"> New Auction </button>
-</div>
+    <div class="row">
+        <div class="col-lg-10"><h2>All Auctions</h2></div>
+        <div class="col-lg-2">
+            <button id="btnNew" class="btn btn-success"> New Auction </button>
+        </div>
+    </div>
 
-<h2>All Auctions</h2>
+    
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Picture URL</th>
-            <th>Description</th>
-            <th>Actual Amount</th>
-            <th>Starting Time</th>
-            <th>End Time</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    <span hidden>@item.ID</span>@item.Title
-                </td>
-                <td>@item.PictureURL</td>
-                <td>@item.Description</td>
-                <td>@item.ActualAmount</td>
-                <td>@item.StartingTime</td>
-                <td>@item.EndTime</td>
-                <td><button class="btnEdit" data-ID="@item.ID">Edit</button></td>
-                <td><button class="btnDelete" data-ID="@item.ID">Delete</button></td>
+                <th>Title</th>
+                <th>Picture URL</th>
+                <th>Description</th>
+                <th>Actual Amount</th>
+                <th>Starting Time</th>
+                <th>End Time</th>
+                <th>Action</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Auctions)
+            {
+                <tr>
+                    <td>
+                        <span hidden>@item.ID</span>@item.Title
+                    </td>
+                    <td>@item.PictureURL</td>
+                    <td>@item.Description</td>
+                    <td>@item.ActualAmount</td>
+                    <td>@item.StartingTime</td>
+                    <td>@item.EndTime</td>
+                    <td><button class="btnEdit btn btn-primary" data-ID="@item.ID">Edit</button></td>
+                    <td><button class="btnDelete btn btn-danger" data-ID="@item.ID">Delete</button></td>
+                </tr>
+            }
 
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 <script>
     
     $("#btnNew").on("click", function() {

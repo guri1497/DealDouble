@@ -7,35 +7,43 @@
 
 <form id="formCreate">
 
-    <label>Title</label>
-    <input name="Title" />
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" placeholder="Enter Title" name="Title">
+    </div>
     <br />
-
-    <label> Picture URL</label>
-    <input name="PictureURL"/>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" placeholder="Enter Description" name="Description">
+    </div>
     <br />
-
-    <label> Description </label>
-    <input name="Description"/>
+    <div class="form-group">
+        <label for="ActualAmount">Actual Amount</label>
+        <input type="number" class="form-control" placeholder="Enter Actual Amount" name="ActualAmount">
+    </div>
     <br />
-
-
-    <label>  Actual Amount </label>
-    <input name="ActualAmount"/>
+    <div class="form-group">
+        <label for="StartingTime">Starting Time</label>
+        <input type="date" class="form-control" placeholder="Enter Starting Time" name="StartingTime">
+    </div>
     <br />
-
-    <label> Starting Time </label>
-    <input name="StartingTime"/>
+    <div class="form-group">
+        <label for="EndTime">End Time</label>
+        <input type="date" class="form-control" placeholder="Enter End Time" name="EndTime">
+    </div>
     <br />
-
-
-    <label> End Time </label>
-    <input name="EndTime"/>
-    <br />
-
-    <button id="btnCreate">Submit</button>
+    <div class="form-group">
+        <label for="PictureURL">Picture URL</label>
+        <input type="text" class="form-control" placeholder="Enter Picture URL" name="PictureURL">
+    </div>
+    <br /><br />
+    <button id="btnCreate" class="btn btn-primary">Submit</button>
 
 </form>
+
+
+
+
 
 <script>
 
@@ -52,9 +60,9 @@
                 $(".actionArea").html("");
 
             })
-               .fail(function (data) {
+            .fail(function (data) {
                 alert("failed");
-        });
+            });
 
     });
 

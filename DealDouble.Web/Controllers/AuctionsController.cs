@@ -1,5 +1,6 @@
 ﻿using DealDouble.Entities;
 using DealDouble.Services;
+using DealDouble.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,18 @@ namespace DealDouble.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            AuctionListingViewModel model = new AuctionListingViewModel();
+            model.Title = "Auction Home";
+            model.Description = "i am descirption";
+            return View(model);
         }
 
 
         [HttpGet]
         public ActionResult Listing()
         {
-            var model = auctionServices.GetAllAuctions();
+            AuctionListingViewModel model = new AuctionListingViewModel();
+            model.Auctions = auctionServices.GetAllAuctions();
             return PartialView(model);
         }
 
@@ -71,6 +76,13 @@ namespace DealDouble.Web.Controllers
             }
             return RedirectToAction("Listing");
 
+        }
+
+        [HttpGet]
+        public ActionResult Details(int ID)
+        {
+            var model = auctionServices.GetAuctionByID(ID);
+            return View(model);
         }
     }
 }

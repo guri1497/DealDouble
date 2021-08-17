@@ -58,23 +58,19 @@ namespace DealDouble.Web.Controllers
             return RedirectToAction("Listing");
         }
 
-        [HttpGet]
-        public ActionResult Delete(int ID)
-        {
-            var model = auctionServices.GetAuctionByID(ID);
-            return PartialView(model);
-        }
+        //[HttpGet]
+        //public ActionResult Delete(int ID)
+        //{
+        //    var model = auctionServices.GetAuctionByID(ID);
+        //    return PartialView(model);
+        //}
 
         [HttpPost]
-        public ActionResult Delete(int ID,string Value)
+        public ActionResult Delete(int ID)
         {
-            if(ID != null && Value == "Yes")
-            {
-                var auction = auctionServices.GetAuctionByID(ID);
-                auctionServices.DeleteAuction(auction);
-                return RedirectToAction("Listing");
-            }
-            return RedirectToAction("Listing");
+              var auction = auctionServices.GetAuctionByID(ID);
+              auctionServices.DeleteAuction(auction);
+              return RedirectToAction("Listing");
 
         }
 

@@ -53,8 +53,8 @@
             data: $("#formCreate").serialize()
 
         })
-            .done(function (data) {
-                $(".mainContent").html(data);
+            .done(function (response) {
+                $(".mainContent").html(response);
                 $('#formModal').modal('toggle');
                 $(".actionArea").html("");
 

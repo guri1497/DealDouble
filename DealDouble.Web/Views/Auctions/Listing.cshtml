@@ -1,0 +1,119 @@
+﻿@model DealDouble.Web.ViewModels.AuctionListingViewModel
+
+@{
+    Layout = null;
+}
+
+<div>
+    <h2>All Auctions</h2>
+    <button id="btnNew" class="btn btn-success float-end" data-toggle="modal" data-target="#formModal"> New Auction </button>
+</div>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Picture URL</th>
+            <th>Description</th>
+            <th>Actual Amount</th>
+            <th>Starting Time</th>
+            <th>End Time</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Auctions)
+        {
+            <tr>
+                <td>
+                    <span hidden>@item.ID</span>@item.Title
+                </td>
+                <td> images </td>
+                <td>@item.Description</td>
+                <td>@item.ActualAmount</td>
+                <td>@item.StartingTime</td>
+                <td>@item.EndTime</td>
+                <td><button class="btnEdit btn btn-primary" data-ID="@item.ID" data-toggle="modal" data-target="#formModal">Edit</button></td>
+                <td><button class="btn btn-danger btnDelete" data-ID="@item.ID">Delete</button></td>
+            </tr>
+
+
+
+        }
+
+    </tbody>
+</table>
+
+
+
+<script>
+
+    $("#btnNew").click(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("Create","Auctions")"
+        })
+            .done(function (response) {
+                $(".actionArea").html(response);
+
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+    });
+
+    $(".btnEdit").click(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("Edit","Auctions")",
+            data: {
+                ID: $(this).attr('data-ID')
+            }
+        })
+            .done(function (response) {
+                $(".actionArea").html(response);
+
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+    });
+
+    $(".btnDelete").click(function () {
+
+        swal({
+            title: "Confirm?",
+            text: "Are you sure want to delete this product.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Delete","Auctions")',
+                        data: {
+                            ID: $(this).attr('data-id') // define custom attribute for using unique value in foreach loop
+                        }
+                    })
+                        .done(function (response) {
+                            $(".mainContent").html(response);
+                            swal("Record has been Deleted.", {
+                                icon: "success",
+                            });
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Fail");
+                        })
+                }
+            });
+    });
+
+
+
+</script>

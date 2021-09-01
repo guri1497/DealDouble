@@ -23,6 +23,13 @@ namespace DealDouble.Services
             return context.Auctions.ToList();
 
         }
+
+        public List<Auction> GetPromotedAuctions()
+        {
+            DealDoubleContext context = new DealDoubleContext();
+            return context.Auctions.Take(4).ToList();
+
+        }
         public void SaveAuction(Auction auction)
         {
             DealDoubleContext context = new DealDoubleContext();
@@ -32,9 +39,11 @@ namespace DealDouble.Services
 
         public void UpdateAuction(Auction auction)
         {
-            DealDoubleContext context = new DealDoubleContext();
-            context.Entry(auction).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
+            using (var context = new DealDoubleContext())
+            {
+                context.Entry(auction).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         public void DeleteAuction(Auction auction)

@@ -3,34 +3,26 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h1> Admin Control Panel </h1>
+<div class="row">
+    <div class="mainContent col-lg-12">
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Picture URL</th>
-            <th>Description</th>
-            <th>Actual Amount</th>
-            <th>Starting Time</th>
-            <th>End Time</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                <span hidden>@item.ID</span>@item.Title</td>
-                <td>@item.PictureURL</td>
-                <td>@item.Description</td>
-                <td>@item.ActualAmount</td>
-                <td>@item.StartingTime</td>
-                <td>@item.EndTime</td>
-               <td><a href="Delete/@item.ID">Delete</a></td>
-            </tr>
+        @{
+            Html.RenderAction("Listing");
         }
 
-    </tbody>
-</table>
+    </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content actionArea">
+
+        </div>
+    </div>
+</div>
+

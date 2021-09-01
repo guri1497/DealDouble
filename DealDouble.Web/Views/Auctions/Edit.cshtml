@@ -1,39 +1,72 @@
 ﻿@model DealDouble.Entities.Auction
 
 @{
-    ViewBag.Title = "Edit";
+    Layout = null;
 }
 
-<h2>Edit</h2>
+<div class="modal-header">
+    <h5 class="modal-title"> Edit Auction </h5>
+</div>
+<form id="formEdit">
+    <div class="modal-body">
+        <div class="form-group" hidden>
+            <label for="ID">ID</label>
+            <input type="number" value="@Model.ID" class="form-control" name="ID">
+        </div>
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" class="form-control" value="@Model.Title" placeholder="Enter Title" name="Title">
+        </div>
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <input type="text" class="form-control" value="@Model.Description" placeholder="Enter Description" name="Description">
+        </div>
 
-<form method="post">
+        <div class="form-group">
+            <label for="ActualAmount">Actual Amount</label>
+            <input type="number" class="form-control" value="@Model.ActualAmount" placeholder="Enter Actual Amount" name="ActualAmount">
+        </div>
 
-    <label>Title</label>
-    <input name="Title" value="@Model.Title"/>
-    <br />
+        <div class="form-group">
+            <label for="StartingTime">Starting Time</label>
+            <input type="datetime" class="form-control" value="@Model.StartingTime" placeholder="Enter Starting Time" name="StartingTime">
+        </div>
 
-    <label> Picture URL</label>
-    <input name="PictureURL" value="@Model.PictureURL"/>
-    <br />
+        <div class="form-group">
+            <label for="EndTime">End Time</label>
+            <input type="datetime" class="form-control" value="@Model.EndTime" placeholder="Enter End Time" name="EndTime">
+        </div>
 
-    <label> Description </label>
-    <input name="Description" value="@Model.Description"/>
-    <br />
-
-
-    <label>  Actual Amount </label>
-    <input name="ActualAmount" value="@Model.ActualAmount"/>
-    <br />
-
-    <label> Starting Time </label>
-    <input name="StartingTime" value="@Model.StartingTime"/>
-    <br />
-
-
-    <label> End Time </label>
-    <input name="EndTime" value="@Model.EndTime"/>
-    <br />
-
-    <button>Submit</button>
-
+        <div class="form-group">
+            <label for="AuctionImages">Picture URL</label>
+            <input type="text" class="form-control" value="@Model.AuctionImages" placeholder="Enter Picture URL" name="AuctionImages">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary" id="btnEdit">Submit</button>
+    </div>
 </form>
+
+
+<script>
+    $("#btnEdit").click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Edit","Auctions")',
+            data: $("#formEdit").serialize()
+
+        })
+            .done(function (response) {
+                $(".mainContent").html(response);
+                $('#formModal').modal('toggle');
+                $(".actionArea").html("");
+
+            })
+            .fail(function (data) {
+                alert("failed");
+            });
+
+    });
+</script>
